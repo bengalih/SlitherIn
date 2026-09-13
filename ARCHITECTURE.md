@@ -1,7 +1,7 @@
 # ARCHITECTURE.md — SlitherIn (the one technical document)
 
 > **Status: CURRENT.** This is the **single consolidated technical document** for
-> the redesigned SlitherIn. It supersedes the four file-based records below,
+> the current SlitherIn. It supersedes the four file-based records below,
 > which were retired as standalone sources of truth on 2026-09-12 after their
 > durable content was folded in here. Their full pre-merge snapshots are archived
 > in `old-docs/` (PLAN.md, CHANGES.md, DESIGN.md, PROJECT-STATE.md) and their
@@ -46,7 +46,7 @@
 
 ## 1. Non-negotiables (locked invariants)
 
-Signed off across the redesign; the source and tests enforce them.
+Signed off for the current app; the source and tests enforce them.
 
 - .NET SDK 10 building for **net48** runtime, WinForms tray app, single EXE.
 - Config is **declarative, strict JSON** (comments allowed via
@@ -539,11 +539,11 @@ accepted: toggles re-show state via their label ("Notifications: On/Off"). No
 full macro editor ever planned — macro content stays JSON-edited (the user's
 workflow).
 
-The tray restores the old-app look on the new menu: custom `icon.ico`/`alert.ico`
-(extracted from the old source into `src\Ui\Icons\`, embedded in the EXE;
+The tray uses the established look: custom `icon.ico`/`alert.ico`
+(in `src\Ui\Icons\`, embedded in the EXE;
 external files next to the exe still override); alert FLASH (500 ms
 normal⇄alert toggle) + tooltip `SlitherIn - <reason>` on error; **left-click**
-opens the menu (private `ShowContextMenu` reflection, carried from the old app)
+opens the menu (private `ShowContextMenu` reflection)
 + shows the pending-error balloon (gated by Notifications); `TwoToneRenderer`
 (blue `Macros:` header, blue macro names, red `Abort:`, green clickable version
 row, gray disabled rows); macro rows are enabled-display with
@@ -682,10 +682,9 @@ Locked, built, tested — nothing "open" remains.
   hand-rolled `StripJsonComments` pre-pass is retired.
 - **Second instance**: signal + balloon, duplicate exits quietly.
 - **Build**: .NET SDK 10 → net48, reference assemblies from NuGet (see §18).
-- **Workspace**: new structure in `D:\SlytherInNew\`; `D:\SlitherIn2\` untouched
-  (read/copy only).
+- **Workspace**: single structure under `D:\SlytherInNew\`.
 - **"Keep ≠ port as-is"**: carried features are re-implemented cleanly in the
-  new structure — behavior survives, not verbatim code.
+  current structure — behavior survives, not verbatim code.
 
 ## 20. File-by-file inventory
 
@@ -848,7 +847,7 @@ Retro-notes for stages 1–4; live notes thereafter.
   `Ordinal` while the lookup pre-uppercased input — `OrdinalIgnoreCase`, no
   uppercasing. Also a wrong TEST of mine (asserted 0x45 — VK_E — unmapped; it's
   actually mapped; now asserts 0x88). `Win32` lacked mouse-UP constants — added.
-  Reference match: `ReplicatingAHKInCSharp.md` records numpad VKs 0x60–0x69 and
+  Cross-check: numpad VKs 0x60–0x69 and
   mouse 0x01–0x05; `KeyMapping` matches both.
 - **Stage 6 live-run (REV -09→-10)** — integration bugs the unit tests couldn't
   catch: (a) the settings file was named `slitherin-settings.json` (hyphen) but
@@ -937,7 +936,7 @@ removal (182 tests, -18→-19).
 
 Current state (2026-09-12, REV `rev-20260912-19`): `dotnet build -c Release` →
 0 errors, 0 warnings; `dotnet test -c Release` → **182 tests, all passed, 0
-skipped, 0 failed**; full tray composition app with the old-app tray look, live
+skipped, 0 failed**; full tray composition app with the complete tray look, live
 hooks + key-finder, profile switcher, macro triggers, toggles, watcher
 auto-reload, alerts + beeps, run-at-startup, second-launch notification, the
 VIIPER HID backend (bus/device setup + keyboard report stream + hard-fail/
@@ -948,7 +947,7 @@ self-heal), and:
   `input_engine` used to crash the load path; a failed normalize now keeps the
   previous config.
 - **C-3** — SendInput wVk-only gap (PLAN audit 4.1): both `wVk` + `wScan` and
-  the extended-key flag added (the reference `ReplicatingAHKInCSharp.md` rule).
+  the extended-key flag added.
 - **C-4** — mid-run window gate (PLAN audit 4.3, option (b)): gate covers
   trigger AND injection with skip-but-kept-ready catch-up (§12).
 - **C-5** — `continue_on_release` (PLAN audit 4.4): `count` always honored;
