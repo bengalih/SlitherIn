@@ -1,0 +1,38 @@
+{
+    // 02 · DELAYS & wait_ms
+    // What this teaches: pacing is controlled by default_delay_ms and the
+    // per-step wait_ms override. The app waits after EVERY step; the delay is
+    // the pause BEFORE the next step fires. Resolution order:
+    //   step wait_ms  →  profile default_delay_ms →  settings default_delay_ms → 3000 ms.
+    "schema_version": 1,
+    "name": "Lesson 02 — Pacing & Delays",
+
+    // Profile-level pause after each step that doesn't override it.
+    "default_delay_ms": 2000,
+
+    "macros": [
+        {
+            "name": "Steady rhythm",
+            "trigger": "Ctrl+F2",
+            "steps": [
+                { "keys": "1" },                    // waits 2000 ms (the profile default)
+                { "keys": "2", "wait_ms": 500 },    // fast: only 500 ms before the NEXT step
+                { "keys": "3" },                    // back to 2000 ms
+                // A pure wait step (no keys/button/sound): pauses, does nothing.
+                { "wait_ms": 5000 },
+                { "keys": "Enter" }
+            ]
+        },
+        {
+            "name": "No delay at all",
+            "trigger": "Ctrl+F3",
+            // wait_ms 0 forces zero delay after that step (the default 2000
+            // would otherwise still apply between steps).
+            "steps": [
+                { "keys": "Enter", "wait_ms": 0 },
+                { "keys": "Enter", "wait_ms": 0 },
+                { "keys": "Enter" }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,30 @@
+{
+    // 09 · SOUND STEPS
+    // What this teaches: audible cues as steps. A sound step plays and the macro
+    // waits for it before continuing. No keyboard involved for this step.
+    // Spec: { "sound": {} } = default tone (500 Hz / 1 s);
+    //       { "sound": { "frequency": 800, "duration_ms": 300 } };
+    //       { "sound": { "file": "Alarm01.wav" } } = a wav/mp3 file, used as-is
+    //       (a bare name resolves against the app's current folder — no automatic
+    //       C:\Windows\Media or exe-dir lookup; give a full path for elsewhere).
+    "schema_version": 1,
+    "name": "Lesson 09 — Sound steps",
+
+    "macros": [
+        {
+            "name": "Start & finish cues",
+            "trigger": "Ctrl+F8",
+            "steps": [
+                // a short 800 Hz beep
+                { "sound": { "frequency": 800, "duration_ms": 300 } },
+                // the default tone: 500 Hz for 1 second
+                { "sound": {} },
+                // 1000 Hz; duration_ms defaults to 1000
+                { "sound": { "frequency": 1000 } },
+                { "keys": "Enter" },
+                // a wav/mp3 file (path used as-is)
+                { "sound": { "file": "Alarm01.wav" } }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,39 @@
+{
+    // 05 · TOGGLE (arm/disarm)
+    // What this teaches: `toggle` is a separate key that arms (or disarms) the
+    // macro. Without a toggle the macro is always armed. "Off" ALWAYS stops a
+    // running macro, whatever else is configured.
+    // Optional cues: toggle_sound { on, off } — a PRESENT slot beeps the default
+    // tone; omit a slot for silence. Custom frequency/duration like a sound step.
+    "schema_version": 1,
+    "name": "Lesson 05 — Toggle Arm/Disarm",
+
+    "macros": [
+        {
+            "name": "Combat cycle (toggle-gated)",
+            "trigger": "LButton",
+            // Hold 800 ms to start cycling (see lesson 04).
+            "fire_after_ms": 800,
+            // Arm with Pause (beep), disarm with Pause (different beep).
+            "toggle": "Pause",
+            "toggle_sound": {
+                "on":  { "frequency": 1500, "duration_ms": 80 },
+                "off": { "frequency": 1000, "duration_ms": 80 }
+            },
+            "loop": { "count": -1 },
+            "schedule": { "mode": "cooldown", "fire_delay_ms": 700 },
+            "steps": [
+                { "keys": "6", "cooldown_ms": 3000 },
+                { "keys": "7", "cooldown_ms": 10000 }
+            ]
+        },
+        {
+            "name": "Quiet toggle",
+            "trigger": "F9",
+            // toggle_sound omitted entirely → no arm/disarm sound.
+            "toggle": "F10",
+            "loop": { "count": -1 },
+            "steps": [ { "keys": "F9", "wait_ms": 0 } ]
+        }
+    ]
+}

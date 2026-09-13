@@ -1,0 +1,42 @@
+{
+    // 15 · INPUT ENGINES (sendinput vs viiper)
+    // What this teaches: `input_engine` selects HOW injected keys reach the OS.
+    //   - settings `input_engine` = the default for every profile.
+    //   - a profile MAY override it (set it only when it differs).
+    //   - "sendinput" (default): simulated keys/mouse via Win32 SendInput —
+    //     works almost anywhere; full-screen/elevated/anti-cheat may ignore it.
+    //   - "viiper": a REAL USB HID keyboard (viiper.exe + usbip-win2 driver),
+    //     for games that block simulated input. Hard-fail: if the active
+    //     profile selects viiper and it is unavailable, that profile does NOT
+    //     run and the tray shows an alert — there is NO silent sendinput
+    //     fallback (a real-keyboard macro must not silently become faked).
+    //   - viiper CANNOT emit mouse. A viiper profile with a `button` step or a
+    //     mouse-key chord is a hard validation error (its HID keyboard report
+    //     has no mouse payload).
+    "schema_version": 1,
+    "name": "Lesson 15 — Input engines",
+
+    "input_engine": "viiper",
+
+    "wrappers": {
+        "bar6": {
+            "before": [ { "keys": "Ctrl+6" } ],
+            "after":  [ { "keys": "Ctrl+1" } ]
+        }
+    },
+
+    "macros": [
+        {
+            "name": "Real-keyboard combat cycle",
+            "trigger": "LButton",
+            "fire_after_ms": 1000,
+            "loop": { "count": -1 },
+            "schedule": { "mode": "cooldown", "fire_delay_ms": 700 },
+            "steps": [
+                { "keys": "0", "cooldown_ms": 3000 },
+                { "keys": "6", "cooldown_ms": 3000 },
+                { "keys": "7", "cooldown_ms": 10000, "wrapper": "bar6" }
+            ]
+        }
+    ]
+}

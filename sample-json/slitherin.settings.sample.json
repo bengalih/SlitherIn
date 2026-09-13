@@ -1,0 +1,59 @@
+{
+    // GLOBAL SETTINGS (slitherin.settings.json template)
+    // Shared by every profile. This file is OPTIONAL next to slitherin.exe —
+    // any key you leave out gets the default shown on the right. Copy next to
+    // the EXE only when you want to change something.
+
+    "schema_version": 1,
+
+    // Abort combo (chord string, same vocabulary as a trigger: "Ctrl+Alt+F12").
+    // Stops every running macro EXCEPT those with "ignore_abort": true.
+    "abort": "Ctrl+Alt+F12",
+
+    // kill: unconditional stop of EVERYTHING, including ignore_abort macros.
+    // The escape hatch that can never be opted out of.
+    "kill": "Ctrl+Alt+Esc",
+
+    // Default pause between steps in milliseconds. A profile can overwrite it
+    // (default_delay_ms), and a step can overwrite it per-step (wait_ms; 0 =
+    // no delay at all).
+    "default_delay_ms": 3000,
+
+    // input_engine: "sendinput" (default) | "viiper". A profile can override
+    // this. If a profile selects viiper and VIIPER is unavailable, that
+    // profile will NOT run and the tray shows the alert — no silent fallback.
+    "input_engine": "sendinput",
+
+    // window_check: master switch for per-profile window gating. ON + a profile
+    // with a window target ⇒ triggers only start, and presses only land, while
+    // that target is foreground. Toggled from the tray; saved back here.
+    "window_check": true,
+
+    // Notifications: tray balloons (errors, second-launch, etc.). Off by default.
+    "notifications": {
+        "enabled": false
+    },
+
+    // log: "off" (default, no log file created) | "on" (REV + errors/warnings)
+    // | "debug" (also every key/mouse event in config-canonical names + the
+    // focused window — paste the logged string straight into a trigger/keys).
+    "log": "off",
+
+    // active_profile: which profile (slitherin.*.json) is active.
+    // profile_mode: "manual" (sticky — the active profile never auto-changes)
+    // | "auto" (switch to whichever profile's window target is foreground).
+    // Both are updated when you pick in the tray Profile menu.
+    "active_profile": "slitherin.json",
+    "profile_mode": "manual",
+
+    // Run-at-startup is NOT a JSON option: it lives in the current user's Run
+    // registry key and is toggled from the tray menu.
+
+    // profile_dirs: EXTRA folders whose slitherin*.json profiles are loaded along
+    // with this exe's own folder (which is ALWAYS searched first). Relative paths
+    // resolve against this settings file's folder — so a settings file + a
+    // profiles\ folder can live side by side and load together. Omit it (or leave
+    // it empty) to use only the exe folder. --profile-dir on the command line
+    // appends even more folders, after these.
+    "profile_dirs": []
+}

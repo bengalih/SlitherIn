@@ -1,0 +1,33 @@
+{
+    // 03 · LOOP COUNT
+    // What this teaches: `loop.count` controls how many passes the macro runs.
+    // Omitted = once. N = N times. -1 = forever (until released/aborted/killed).
+    // count is ALWAYS honored for both tap and held triggers (see lesson 06).
+    "schema_version": 1,
+    "name": "Lesson 03 — Loop Count",
+
+    "default_delay_ms": 500,
+
+    "macros": [
+        {
+            "name": "Once (no loop block)",
+            "trigger": "Ctrl+F1",
+            // No loop → count defaults to 1.
+            "steps": [ { "keys": "1" } ]
+        },
+        {
+            "name": "Exactly three times",
+            "trigger": "Ctrl+F2",
+            "loop": { "count": 3 },
+            "steps": [ { "keys": "2", "wait_ms": 0 } ]
+        },
+        {
+            "name": "Forever (tap trigger)",
+            // A TAP trigger runs its infinite loop until abort/kill/toggle-off.
+            // Release never ends a tap (key-up is just the end of the tap).
+            "trigger": "Ctrl+F3",
+            "loop": { "count": -1 },
+            "steps": [ { "keys": "3", "wait_ms": 0 } ]
+        }
+    ]
+}

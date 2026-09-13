@@ -1,0 +1,43 @@
+{
+    // 07 · CHORD SEQUENCES (one logical action) + button steps
+    // What this teaches: a `keys` LIST fires several chords IN SEQUENCE as ONE
+    // logical action (no pacing between them — pacing applies BETWEEN steps).
+    // Example: "switch bar to 6, then press 7" is one step, not two.
+    // Also: the `button` step for mouse buttons as a step.
+    "schema_version": 1,
+    "name": "Lesson 07 — Chord sequences & button steps",
+
+    "default_delay_ms": 1000,
+
+    "macros": [
+        {
+            "name": "Bar switch + press as one step",
+            "trigger": "Ctrl+F4",
+            "steps": [
+                // One logical action: Ctrl+6 (switch bar), then 7 (press).
+                { "keys": ["Ctrl+6", "7"] },
+                { "keys": "7" }
+            ]
+        },
+        {
+            "name": "Numpad vs top row",
+            "trigger": "Ctrl+F5",
+            "steps": [
+                // Top-row digit 1 ...
+                { "keys": "1" },
+                // ... vs the numpad key: explicit, distinct.
+                { "keys": ["Numpad1", "Numpad2"] }
+            ]
+        },
+        {
+            "name": "Mouse as a step (button)",
+            "trigger": "Ctrl+F6",
+            "steps": [
+                // A mouse button press+release. Legal on sendinput; see lesson
+                // 15 for the viiper (HID keyboard) restriction.
+                { "button": "LButton" },
+                { "button": "XButton2", "wait_ms": 0 }
+            ]
+        }
+    ]
+}

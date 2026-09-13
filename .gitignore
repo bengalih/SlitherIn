@@ -1,0 +1,27 @@
+# Build artifacts
+src/bin/
+src/obj/
+tests/**/bin/
+tests/**/obj/
+TestResults/
+
+# Runtime artifacts
+*.log
+
+# Visual Studio / IDE
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+.idea/
+.vscode/
+
+# Per-user config (root level only — the repo samples live in sample-json/)
+/slitherin.settings.json
+/slitherin*.json
+
+# OS junk
+Thumbs.db
+Desktop.ini
+.DS_Store

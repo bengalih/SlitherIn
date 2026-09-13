@@ -1,0 +1,32 @@
+{
+    // 14 · WINDOW GATING + AUTO MODE
+    // What this teaches: a profile's `window` target (exe and/or title; exe-only
+    // is fine) drives two things:
+    //   a) GATING — with settings `window_check: true`, the profile's triggers
+    //      only start when its target is foreground, and a running macro's
+    //      key presses are skipped-but-kept-ready while the target is not
+    //      foreground (they fire on the next focused moment; wall-clock
+    //      cooldowns keep counting — nothing pauses on focus loss).
+    //   b) AUTO SELECTION — with settings `profile_mode: "auto"`, the tray
+    //      switches to whichever profile's window target is foreground.
+    // A profile with NO window target is manual-only (never auto-selected) and
+    // is never gated. Two profiles with overlapping targets = a warning in
+    // AUTO mode (targets must differ in exe or title to be separable).
+    "schema_version": 1,
+    "name": "Lesson 14 — Window gating",
+
+    "window": {
+        "exe": "dndclient64.exe",
+        "title": "CharacterC - Sarlona"
+    },
+
+    "macros": [
+        {
+            "name": "Only in the game window",
+            "trigger": "Ctrl+F11",
+            "steps": [
+                { "keys": "Enter" }
+            ]
+        }
+    ]
+}

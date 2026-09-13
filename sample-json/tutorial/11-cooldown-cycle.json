@@ -1,0 +1,28 @@
+{
+    // 11 · COOLDOWN SCHEDULER (the old cycle / combat flow)
+    // What this teaches: `schedule.mode: "cooldown"` scans the steps each pass
+    // and fires EVERY step whose `cooldown_ms` has elapsed since its last fire
+    // (list order), paced by `fire_delay_ms` between consecutive firings, then
+    // rescans. A step with NO cooldown_ms is ALWAYS ready and fires every pass.
+    // This is the engine that replaces the old "cycle" block — the full combat
+    // template lives in profiles/slitherin.json.
+    "schema_version": 1,
+    "name": "Lesson 11 — Cooldown cycle",
+
+    "macros": [
+        {
+            "name": "Hold LButton to cycle",
+            "trigger": "LButton",
+            "fire_after_ms": 1000,
+            "schedule": { "mode": "cooldown", "fire_delay_ms": 700 },
+            "loop": { "count": -1 },
+            "steps": [
+                // Steady actions, each on its own cooldown.
+                { "keys": "0", "cooldown_ms": 3000 },
+                { "keys": "6", "cooldown_ms": 3000 },
+                // Always-ready step: fires every pass (e.g. an at-will key).
+                { "keys": "9" }
+            ]
+        }
+    ]
+}

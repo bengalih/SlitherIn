@@ -1,0 +1,36 @@
+{
+    // Second account's profile. Because its window TITLE is distinct
+    // ("CharacterB - Sarlona"), AUTO mode switches to it whenever that
+    // window is foreground — no manual selection needed.
+    "schema_version": 1,
+    "name": "Alt (CharacterB - Sarlona)",
+
+    "window": {
+        "exe": "dndclient64.exe",
+        "title": "CharacterB - Sarlona"
+    },
+
+    "default_delay_ms": 2500,
+
+    "macros": [
+        {
+            "name": "Buff Self",
+            "trigger": "Ctrl+K",
+            // tap trigger, no loop block = fire once
+            "steps": [
+                { "sound": {} },
+                { "keys": "1" },
+                { "keys": "2", "wait_ms": 0 }
+            ]
+        },
+        {
+            "name": "Hold Forward",
+            "trigger": "RButton",
+            "fire_after_ms": 300,
+            // hold_for_ms on a step keeps the key held that long before release
+            "steps": [
+                { "keys": "W", "hold_for_ms": 2000 }
+            ]
+        }
+    ]
+}

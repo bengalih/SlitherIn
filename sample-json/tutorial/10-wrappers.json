@@ -1,0 +1,41 @@
+{
+    // 10 · WRAPPERS (reusable before/after step sets)
+    // What this teaches: a named `wrapper` attaches `before` and/or `after`
+    // steps to a key step, expanding it into MORE steps (before → key → after)
+    // at load time. The point: DRY bar-switching / per-action setup without
+    // repeating inline lists and without any game-specific keyword.
+    // Rules: no params (a wrapper is a constant — different timing = different
+    // wrapper), no stacking (one wrapper per step), contents = any step shape.
+    "schema_version": 1,
+    "name": "Lesson 10 — Wrappers",
+
+    "wrappers": {
+        // "Switch to bar N before pressing, back to bar 1 after."
+        "bar2": {
+            "before": [ { "keys": "Ctrl+2" } ],
+            "after":  [ { "keys": "Ctrl+1" } ]
+        },
+        "bar6": {
+            "before": [ { "keys": "Ctrl+6" } ],
+            "after":  [ { "keys": "Ctrl+1" } ]
+        },
+        "cuestart": {
+            "before": [ { "sound": { "frequency": 1200, "duration_ms": 100 } } ]
+        }
+    },
+
+    "macros": [
+        {
+            "name": "Hotbar actions without a hotbar keyword",
+            "trigger": "Ctrl+F9",
+            "steps": [
+                // Expands to: Ctrl+6, 7, Ctrl+1 (one logical action).
+                { "keys": "7", "wrapper": "bar6" },
+                // Expands to: Ctrl+2, 8, Ctrl+1.
+                { "keys": "8", "wrapper": "bar2" },
+                // A cue before this step.
+                { "keys": "9", "wrapper": "cuestart" }
+            ]
+        }
+    ]
+}

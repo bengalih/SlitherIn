@@ -1,0 +1,39 @@
+{
+    // 12 · ABORT TIERS
+    // What this teaches: the four escalation scopes for stopping runs, detected
+    // through the same single hook as everything else.
+    //   1. per-macro `abort_keys`  — stops ONLY this macro, mid-run.
+    //   2. global settings `abort` — stops every macro except `ignore_abort`.
+    //   3. `ignore_abort: true`    — this macro ignores the global abort
+    //      (e.g. a very long background cycle you don't want interrupted).
+    //   4. settings `kill`         — unconditional; stops EVERYTHING including
+    //      ignore_abort macros. The escape hatch that cannot be opted out of.
+    // The global abort/kill combos themselves live in slitherin.settings.json;
+    // see slitherin.settings.sample.json in this folder.
+    "schema_version": 1,
+    "name": "Lesson 12 — Abort & kill",
+
+    "macros": [
+        {
+            "name": "Self-abortable buff",
+            "trigger": "Ctrl+F10",
+            "abort_keys": "F12",
+            // Pressing F12 mid-run stops ONLY this macro.
+            "steps": [
+                { "keys": "1" },
+                { "keys": "2" },
+                { "keys": "3" }
+            ]
+        },
+        {
+            "name": "Six-minute rebuffer (abort-proof)",
+            "trigger": "F9",
+            "loop": { "count": -1 },
+            "ignore_abort": true,
+            // The global abort will NOT stop this one. Only _kill_ (settings
+            // level) or toggling it off can.
+            "schedule": { "mode": "cooldown", "fire_delay_ms": 360000 },
+            "steps": [ { "keys": "R" } ]
+        }
+    ]
+}

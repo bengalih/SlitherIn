@@ -1,0 +1,42 @@
+{
+    // 06 · continue_on_release
+    // What this teaches: what happens to a RUNNING macro when you release the
+    // trigger. The rule is simple:
+    //   - TAP triggers (no fire_after_ms): release is the end of the tap —
+    //     the macro ALWAYS runs its full count. continue_on_release is irrelevant.
+    //   - HELD triggers (fire_after_ms): releasing STOPS the run unless
+    //     continue_on_release: true (then it runs its full count to the end).
+    // count is honored at every value, both kinds.
+    "schema_version": 1,
+    "name": "Lesson 06 — continue_on_release",
+
+    "default_delay_ms": 200,
+
+    "macros": [
+        {
+            "name": "Held: release stops (default)",
+            "trigger": "RButton",
+            "fire_after_ms": 500,
+            "loop": { "count": 5 },
+            // continue_on_release omitted → false for a held trigger. Letting
+            // go of RButton stops this macro mid-run.
+            "steps": [ { "keys": "1" } ]
+        },
+        {
+            "name": "Held: release keeps going",
+            "trigger": "RButton",
+            "fire_after_ms": 500,
+            "loop": { "count": 5, "continue_on_release": true },
+            // You only need a 500 ms press to kick it off; the 5 passes then
+            // complete even if you release immediately.
+            "steps": [ { "keys": "2" } ]
+        },
+        {
+            "name": "Tap: always runs to count",
+            "trigger": "F8",
+            "loop": { "count": 4 },
+            // Tap trigger — release cancels nothing. 4 passes, always.
+            "steps": [ { "keys": "3" } ]
+        }
+    ]
+}

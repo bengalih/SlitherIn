@@ -1,0 +1,37 @@
+{
+    // 01 · TRIGGER & BASIC KEYS
+    // What this teaches: a trigger is a CHORD written in the same vocabulary as
+    // step keys, and a key step is a press+release. Copy to a slitherin.*.json
+    // profile (or just read and steal from it).
+    "schema_version": 1,
+    "name": "Lesson 01 — Trigger & Basic Keys",
+
+    "macros": [
+        {
+            "name": "Typing sample",
+            // The chord that starts the macro. Fires on the press (tap) unless
+            // fire_after_ms is present (see lesson 04). Silent by default.
+            "trigger": "Ctrl+F1",
+            "steps": [
+                // Press and release a key.
+                { "keys": "Enter" },
+                { "keys": "F7" },
+                { "keys": "Space" },
+                // A chord: hold Ctrl, tap M, release. Modifier order is locked
+                // to Ctrl, Alt, Shift, Win.
+                { "keys": "Ctrl+M" },
+                { "keys": "Shift+F7" },
+                { "keys": "Esc" }
+            ]
+        },
+        {
+            "name": "Modifiers are not keys",
+            // A lone modifier (or a key with no key token) is NOT a valid chord.
+            // The empty trigger is a schema error — every macro needs one.
+            "trigger": "Alt+G",
+            "steps": [
+                { "keys": "1" }
+            ]
+        }
+    ]
+}

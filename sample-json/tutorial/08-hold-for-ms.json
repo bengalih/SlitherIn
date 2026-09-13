@@ -1,0 +1,30 @@
+{
+    // 08 · hold_for_ms (step-level)
+    // What this teaches: `hold_for_ms` on a KEY step keeps that single key held
+    // N ms before releasing it — a long press. It requires EXACTLY ONE chord in
+    // that step (no chord lists, no mouse-but-not-a-key corner).
+    // Use case: "press and HOLD W for 2 seconds to autorun in one input."
+    "schema_version": 1,
+    "name": "Lesson 08 — hold_for_ms",
+
+    "macros": [
+        {
+            "name": "Press-and-hold forward",
+            "trigger": "Ctrl+F7",
+            "steps": [
+                // Hold W down for 2 seconds, then release.
+                { "keys": "W", "hold_for_ms": 2000 },
+                { "keys": "Space" }
+            ]
+        },
+        {
+            "name": "Charged attack",
+            "trigger": "RButton",
+            "fire_after_ms": 200,
+            "steps": [
+                // Hold the key 1.5 s while the held trigger keeps the run alive.
+                { "keys": "3", "hold_for_ms": 1500 }
+            ]
+        }
+    ]
+}

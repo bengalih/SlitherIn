@@ -1,0 +1,38 @@
+{
+    // 13 · MOUSE INPUT
+    // What this teaches: mouse buttons are first-class chords — usable as
+    // triggers, as `button` steps, and inside chords. Naming: LButton, RButton,
+    // MButton, XButton1, XButton2 (0–4 = VK 0x01–0x05).
+    // Caution: a "viiper" profile cannot emit mouse — see lesson 15.
+    "schema_version": 1,
+    "name": "Lesson 13 — Mouse input",
+
+    "macros": [
+        {
+            "name": "Forward-reload",
+            "trigger": "XButton2",
+            "steps": [
+                { "keys": "R" }
+            ]
+        },
+        {
+            "name": "Combo press",
+            "trigger": "Shift+MButton",
+            "steps": [
+                { "button": "RButton" }
+            ]
+        },
+        {
+            "name": "Kick a cycle with the mouse",
+            "trigger": "LButton",
+            "fire_after_ms": 1000,
+            "loop": { "count": -1 },
+            "schedule": { "mode": "cooldown", "fire_delay_ms": 700 },
+            "steps": [
+                { "keys": "0", "cooldown_ms": 3000 },
+                { "keys": "6", "cooldown_ms": 3000 },
+                { "keys": "7", "cooldown_ms": 10000 }
+            ]
+        }
+    ]
+}

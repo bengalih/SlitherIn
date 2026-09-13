@@ -1,0 +1,34 @@
+{
+    // 04 · HOLD TO FIRE (fire_after_ms)
+    // What this teaches: `fire_after_ms` turns a trigger into a HELD trigger —
+    // the key must stay held that long before the macro counts as started.
+    // Releasing before the threshold cancels the hold. This is the old app's
+    // "arm_delay_ms" for cycles you deliberately hold (e.g. LButton to cycle).
+    "schema_version": 1,
+    "name": "Lesson 04 — Hold to Fire",
+
+    "macros": [
+        {
+            "name": "Hold LButton 1s to buff",
+            "trigger": "LButton",
+            "fire_after_ms": 1000,
+            // Once started, this runs ONCE (no loop block). It does NOT keep
+            // firing on every pass.
+            "steps": [
+                { "sound": {} },
+                { "keys": "1" },
+                { "keys": "2", "wait_ms": 0 }
+            ]
+        },
+        {
+            "name": "Hold RButton to walk-forward cycle",
+            "trigger": "RButton",
+            "fire_after_ms": 300,
+            "loop": { "count": -1 },
+            "steps": [
+                { "wait_ms": 100 },
+                { "keys": "W" }
+            ]
+        }
+    ]
+}
